@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+/* Markdown content inside assistant chat bubbles */
+.markdown-body :is(p, ul, ol, pre, blockquote, table) {
+  @apply my-2 first:mt-0 last:mb-0;
+}
+.markdown-body :is(h1, h2, h3, h4) {
+  @apply mt-3 mb-1.5 font-semibold first:mt-0;
+}
+.markdown-body h1 { @apply text-lg; }
+.markdown-body h2 { @apply text-base; }
+.markdown-body ul { @apply list-disc pl-5; }
+.markdown-body ol { @apply list-decimal pl-5; }
+.markdown-body li { @apply my-0.5; }
+.markdown-body code {
+  @apply rounded bg-slate-200/70 px-1 py-0.5 text-[0.85em];
+}
+.markdown-body pre {
+  @apply overflow-x-auto rounded-lg bg-slate-800 p-3 text-slate-100;
+}
+.markdown-body pre code {
+  @apply bg-transparent p-0 text-inherit;
+}
+.markdown-body blockquote {
+  @apply border-l-4 border-slate-300 pl-3 text-slate-600;
+}
+.markdown-body a {
+  @apply text-indigo-600 underline;
+}
+.markdown-body table {
+  @apply w-full border-collapse text-sm;
+}
+.markdown-body :is(th, td) {
+  @apply border border-slate-300 px-2 py-1 text-left;
+}

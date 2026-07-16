@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: ai-knowledge-assistant
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:assistant;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 6MB
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-stacktrace: never
+
+app:
+  jwt:
+    # Override in every deployed environment. Must be at least 256 bits (32 chars).
+    secret: ${JWT_SECRET:local-dev-only-secret-key-please-override-in-production!}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  gemini:
+    api-key: ${GEMINI_API_KEY:}
+    model: ${GEMINI_MODEL:gemini-2.5-flash}
+    base-url: ${GEMINI_BASE_URL:https://generativelanguage.googleapis.com}
+  upload:
+    max-file-size-bytes: 5242880
+  ai:
+    history-max-messages: 20
+    document-char-budget: 100000
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.aiknowledge.assistant: INFO
