@@ -6,9 +6,9 @@ A full-stack AI-powered knowledge assistant: persistent AI chat, document Q&A (P
 
 | | URL |
 |---|---|
-| Frontend | _deployment in progress_ |
-| Backend API | _deployment in progress_ |
-| API Docs (Swagger UI) | _deployment in progress_ |
+| Frontend | https://ai-knowledge-assistant-xi.vercel.app |
+| Backend API | https://ai-knowledge-assistant-api-1nzm.onrender.com |
+| API Docs (Swagger UI) | https://ai-knowledge-assistant-api-1nzm.onrender.com/swagger-ui.html |
 
 > The backend runs on Render's free tier, which spins down after inactivity — the **first request may take ~50 seconds** while the instance cold-starts. Subsequent requests are fast.
 
