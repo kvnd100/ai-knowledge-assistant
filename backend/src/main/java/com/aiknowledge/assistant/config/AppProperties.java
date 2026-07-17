@@ -14,7 +14,7 @@ public record AppProperties(
 
     public record Cors(String allowedOrigins) {}
 
-    public record Gemini(String apiKey, String model, String baseUrl) {}
+    public record Gemini(String apiKey, String model, String fallbackModel, String baseUrl) {}
 
     public record Upload(long maxFileSizeBytes) {}
 

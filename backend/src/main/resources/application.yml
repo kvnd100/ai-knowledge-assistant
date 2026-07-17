@@ -29,6 +29,7 @@ app:
   gemini:
     api-key: ${GEMINI_API_KEY:}
     model: ${GEMINI_MODEL:gemini-flash-latest}
+    fallback-model: ${GEMINI_FALLBACK_MODEL:gemini-flash-lite-latest}
     base-url: ${GEMINI_BASE_URL:https://generativelanguage.googleapis.com}
   upload:
     max-file-size-bytes: 5242880

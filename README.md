@@ -50,7 +50,7 @@ frontend (React 19 + Vite + Tailwind)          backend (Spring Boot 3.5 / Java 2
 
 ## AI integration
 
-Provider: Google Gemini (`gemini-flash-latest`) through the `generateContent` REST API, used for all AI features.
+Provider: Google Gemini (`gemini-flash-latest`) through the `generateContent` REST API, used for all AI features. Transient provider errors (429/5xx) are retried once and then routed to a fallback model (`gemini-flash-lite-latest` by default), since the free-tier pool for a single model can be temporarily saturated.
 
 - General chat uses a system instruction covering tone, Markdown output, honesty about uncertainty, and protection against instruction leaking. The last 20 messages of the conversation are replayed as alternating user/model turns, which gives the model context without unbounded token growth.
 - Document chat embeds the extracted text in the system instruction with grounding rules: answer only from the document, quote relevant passages, and say when the answer isn't in it. Documents are capped at a 100,000-character budget; when a document is truncated the prompt says so, and the model discloses that only part of it was available.
@@ -156,6 +156,7 @@ To run against PostgreSQL instead of H2, set `DB_URL`, `DB_USERNAME`, `DB_PASSWO
 | `GEMINI_API_KEY` | Gemini API key |
 | `CORS_ALLOWED_ORIGINS` | Deployed frontend origin(s), comma-separated |
 | `GEMINI_MODEL` | Optional, defaults to `gemini-flash-latest` |
+| `GEMINI_FALLBACK_MODEL` | Optional, defaults to `gemini-flash-lite-latest`; used when the primary model is unavailable |
 
 The frontend needs only `VITE_API_URL` (backend base URL) at build time.
 
