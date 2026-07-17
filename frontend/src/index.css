@@ -1,11 +1,33 @@
 @import "tailwindcss";
 
+/* Thayga design tokens */
+@theme {
+  --color-brand-50: #f3f5fb;
+  --color-brand-100: #e6eaf7;
+  --color-brand-200: #c8d2ec;
+  --color-brand-300: #9fb0dd;
+  --color-brand-400: #7089c9;
+  --color-brand-500: #4d69b5;
+  --color-brand-600: #3a539e;
+  --color-brand-700: #2f4380;
+  --color-brand-800: #283861;
+  --color-brand-900: #1f2a47;
+
+  --color-canvas: #f8fafc;    /* app background */
+  --color-surface: #ffffff;   /* cards, panels, inputs */
+  --color-line: #e2e8f0;      /* borders */
+  --color-line-soft: #f1f5f9; /* row dividers */
+  --color-ink: #0f172a;       /* primary text */
+  --color-muted: #64748b;     /* secondary text */
+  --color-faint: #94a3b8;     /* tertiary text, placeholders */
+}
+
 html, body, #root {
   height: 100%;
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
+  @apply bg-canvas text-ink antialiased;
 }
 
 /* Markdown content inside assistant chat bubbles */
@@ -30,14 +52,14 @@ body {
   @apply bg-transparent p-0 text-inherit;
 }
 .markdown-body blockquote {
-  @apply border-l-4 border-slate-300 pl-3 text-slate-600;
+  @apply border-l-4 border-line pl-3 text-muted;
 }
 .markdown-body a {
-  @apply text-indigo-600 underline;
+  @apply text-brand-600 underline;
 }
 .markdown-body table {
   @apply w-full border-collapse text-sm;
 }
 .markdown-body :is(th, td) {
-  @apply border border-slate-300 px-2 py-1 text-left;
+  @apply border border-line px-2 py-1 text-left;
 }

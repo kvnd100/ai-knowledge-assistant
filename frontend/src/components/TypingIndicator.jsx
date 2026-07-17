@@ -1,7 +1,7 @@
 export default function TypingIndicator() {
   return (
     <div className="flex justify-start">
-      <div className="flex items-center gap-1 rounded-2xl rounded-bl-sm border border-slate-200 bg-white px-4 py-3 shadow-sm">
+      <div className="flex items-center gap-1 rounded-2xl rounded-bl-sm border border-line bg-surface px-4 py-3 shadow-sm">
         {[0, 150, 300].map((delay) => (
           <span
             key={delay}

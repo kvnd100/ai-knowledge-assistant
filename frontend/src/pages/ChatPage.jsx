@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { FileText, MessageCircle } from 'lucide-react'
 import { api } from '../api/client'
 import Button from '../components/Button.jsx'
 import ErrorBanner from '../components/ErrorBanner.jsx'
@@ -142,13 +143,14 @@ export default function ChatPage() {
 
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Conversation header */}
-        <div className="border-b border-slate-200 bg-white px-4 py-3">
+        <div className="border-b border-line bg-surface px-4 py-3">
           <h2 className="truncate text-sm font-semibold text-slate-800">
             {detail ? detail.title : 'New conversation'}
           </h2>
           {isDocumentChat && (
-            <p className="truncate text-xs text-slate-500">
-              📄 Answering from: {detail.documentFilename}
+            <p className="truncate text-xs text-muted">
+              <FileText className="mr-1 inline h-3.5 w-3.5 align-text-bottom" aria-hidden="true" />
+              Answering from: {detail.documentFilename}
             </p>
           )}
         </div>
@@ -157,18 +159,18 @@ export default function ChatPage() {
         <div className="flex-1 overflow-y-auto px-4 py-4">
           {detailLoading ? (
             <div className="flex h-full items-center justify-center">
-              <Spinner size="lg" className="text-indigo-500" />
+              <Spinner size="lg" className="text-brand-500" />
             </div>
           ) : detailError ? (
             <ErrorBanner message={detailError} />
           ) : messages.length === 0 && !sending ? (
             <EmptyState
-              icon="💬"
+              icon={MessageCircle}
               title={isDocumentChat ? 'Ask about this document' : 'Start a conversation'}
               subtitle={
                 isDocumentChat
-                  ? 'Ask anything about the uploaded document and the assistant will answer from its contents.'
-                  : 'Type a message below. Your conversation is saved automatically so you can resume it any time.'
+                  ? 'Answers are based on the contents of the uploaded document.'
+                  : 'Conversations are saved and can be resumed at any time.'
               }
             />
           ) : (
@@ -183,7 +185,7 @@ export default function ChatPage() {
         </div>
 
         {/* Composer */}
-        <div className="border-t border-slate-200 bg-white p-4">
+        <div className="border-t border-line bg-surface p-4">
           <ErrorBanner message={sendError} onDismiss={() => setSendError(null)} className="mx-auto mb-3 max-w-3xl" />
           <form onSubmit={handleSend} className="mx-auto flex max-w-3xl items-end gap-2">
             <textarea
@@ -199,7 +201,7 @@ export default function ChatPage() {
               rows={1}
               maxLength={8000}
               className="max-h-40 min-h-[42px] flex-1 resize-y rounded-lg border border-slate-300 px-3 py-2.5 text-sm
-                outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
+                outline-none transition placeholder:text-faint focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
             />
             <Button type="submit" loading={sending} disabled={!draft.trim()}>
               Send

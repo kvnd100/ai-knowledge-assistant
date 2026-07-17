@@ -35,12 +35,12 @@ export default function LoginPage() {
     <div className="flex min-h-full items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="mb-8 text-center">
-          <h1 className="text-2xl font-bold text-indigo-700">AI Knowledge Assistant</h1>
-          <p className="mt-1 text-sm text-slate-500">Sign in to your account</p>
+          <h1 className="text-2xl font-bold text-brand-700">AI Knowledge Assistant</h1>
+          <p className="mt-1 text-sm text-muted">Sign in to your account</p>
         </div>
         <form
           onSubmit={handleSubmit}
-          className="space-y-4 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+          className="space-y-4 rounded-xl border border-line bg-surface p-6 shadow-sm"
           noValidate
         >
           <ErrorBanner message={error} onDismiss={() => setError(null)} />
@@ -70,9 +70,9 @@ export default function LoginPage() {
             Sign in
           </Button>
         </form>
-        <p className="mt-4 text-center text-sm text-slate-500">
+        <p className="mt-4 text-center text-sm text-muted">
           No account yet?{' '}
-          <Link to="/register" className="font-medium text-indigo-600 hover:underline">
+          <Link to="/register" className="font-medium text-brand-600 hover:underline">
             Create one
           </Link>
         </p>

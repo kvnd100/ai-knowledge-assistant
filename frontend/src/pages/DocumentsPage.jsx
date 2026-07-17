@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { File, FileText, Upload } from 'lucide-react'
 import { api } from '../api/client'
 import Button from '../components/Button.jsx'
 import Card from '../components/Card.jsx'
@@ -65,9 +66,9 @@ export default function DocumentsPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="mb-1 text-xl font-bold text-slate-900">Documents</h1>
-      <p className="mb-6 text-sm text-slate-500">
-        Upload a PDF or TXT file (max 5 MB), then chat with the AI about its contents.
+      <h1 className="mb-1 text-xl font-bold text-ink">Documents</h1>
+      <p className="mb-6 text-sm text-muted">
+        Upload a PDF or TXT file (max 5 MB) to ask questions about its contents.
       </p>
 
       {/* Upload dropzone */}
@@ -84,19 +85,19 @@ export default function DocumentsPage() {
         }}
         className={`mb-3 flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed
           px-6 py-10 text-center transition ${
-            dragOver ? 'border-indigo-400 bg-indigo-50' : 'border-slate-300 bg-white'
+            dragOver ? 'border-brand-400 bg-brand-50' : 'border-slate-300 bg-surface'
           }`}
       >
         {uploading ? (
           <>
-            <Spinner size="lg" className="text-indigo-500" />
-            <p className="text-sm text-slate-500">Uploading and extracting text…</p>
+            <Spinner size="lg" className="text-brand-500" />
+            <p className="text-sm text-muted">Uploading and extracting text…</p>
           </>
         ) : (
           <>
-            <span className="text-3xl" aria-hidden="true">📤</span>
+            <Upload className="h-8 w-8 text-faint" aria-hidden="true" />
             <p className="text-sm font-medium text-slate-700">Drag & drop a PDF or TXT here</p>
-            <p className="text-xs text-slate-400">or</p>
+            <p className="text-xs text-faint">or</p>
             <Button variant="secondary" onClick={() => fileInputRef.current?.click()}>
               Browse files
             </Button>
@@ -117,29 +118,34 @@ export default function DocumentsPage() {
         <ErrorBanner message={listError} className="mb-3" />
         {loading ? (
           <div className="flex justify-center py-8">
-            <Spinner size="lg" className="text-indigo-500" />
+            <Spinner size="lg" className="text-brand-500" />
           </div>
         ) : documents.length === 0 ? (
           <EmptyState
-            icon="📄"
+            icon={FileText}
             title="No documents yet"
-            subtitle="Upload your first document above to start asking questions about it."
+            subtitle="Uploaded documents appear here."
           />
         ) : (
-          <ul className="divide-y divide-slate-100">
+          <ul className="divide-y divide-line-soft">
             {documents.map((document) => (
               <li key={document.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium text-slate-800">
-                    {document.contentType === 'application/pdf' ? '📕' : '📃'} {document.filename}
+                    {document.contentType === 'application/pdf' ? (
+                      <File className="mr-1 inline h-3.5 w-3.5 align-text-bottom" aria-hidden="true" />
+                    ) : (
+                      <FileText className="mr-1 inline h-3.5 w-3.5 align-text-bottom" aria-hidden="true" />
+                    )}
+                    {document.filename}
                   </p>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-faint">
                     {formatSize(document.sizeBytes)} · {new Date(document.createdAt).toLocaleString()}
                   </p>
                 </div>
                 {document.conversationId && (
                   <Link to={`/chat/${document.conversationId}`}>
-                    <Button variant="secondary">Chat about it</Button>
+                    <Button variant="secondary">Open chat</Button>
                   </Link>
                 )}
               </li>
